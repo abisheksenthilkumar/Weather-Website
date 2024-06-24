@@ -2,7 +2,8 @@ var inputvalue = document.querySelector("#cityinput");
 var btn = document.querySelector("#add");
 var city = document.querySelector("#cityoutput");
 var descrip = document.querySelector("#description");
-var temp = document.querySelector("#wind");
+var temp = document.querySelector("#temp");
+var wind = document.querySelector("#wind");
 apik = "e8c3236f1aef16cdfd55cc1a28822fb1";
 function convertion(val) {
   return (val - 273).toFixed(3);
@@ -10,7 +11,7 @@ function convertion(val) {
 
 btn.addEventListener("click", function () {
   fetch(
-    "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
       inputvalue.value +
       "&appid=" +
       apik
@@ -23,10 +24,10 @@ btn.addEventListener("click", function () {
       var tempature = data["main"]["temp"];
       var wndspeed = data["wind"]["speed"];
 
-      city.innerHTML = "Weather of <span>${nameval}<span>";
-      temp.innerHTML = "Temperature <span>${ convertion(temperature)} C<span>";
-      description.innerHTML = "Sky Conditions: <span>${descrip}<span>";
-      wind.innerHTML = "Wind Speed: <span>${wndspeed} km/h<span>";
+      city.innerHTML = `Weather of <span>${nameval}<span>`;
+      temp.innerHTML = `Temperature: <span>${convertion(tempature)} C</span>`;
+      description.innerHTML = `Sky Conditions: <span>${descrip}<span>`;
+      wind.innerHTML = `Wind Speed: <span>${wndspeed} km/h<span>`;
     })
 
     .catch((err) => alert("You entered Wrong city name"));
